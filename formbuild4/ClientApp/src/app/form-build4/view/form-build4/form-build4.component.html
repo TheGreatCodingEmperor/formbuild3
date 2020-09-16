@@ -1,9 +1,32 @@
-<div>
+<div style="display: flex;" (mouseup)="unselectAllGroup()">
     <div style="width:50%;">
-        
+        <div [id]="items" cdkDropList #todoList="cdkDropList" [cdkDropListData]="itemPool"
+            [cdkDropListConnectedTo]="dropList" class="example-list" (cdkDropListDropped)="drop($event)">
+            
+            <div *ngFor="let item of itemPool" cdkDrag>
+                <div class="example-custom-placeholder" *cdkDragPlaceholder>
+
+                </div>{{item.type}}</div>
+        </div>
     </div>
-    <form style="width:50%;" [formGroup]="form" (ngSubmit)="submit(model)">
-        <formly-form [form]="form" [fields]="fields" [model]="model"></formly-form>
-        <button type="submit" class="btn btn-default">Submit</button>
-    </form>
+
+
+    <div style="width:50%;">
+        <form style="width:50%;" [formGroup]="form2" (ngSubmit)="submit(model)">
+            <app-design-formly-form [form]="form2" [fields]="fields2" [model]="model2" [Id]="'field2'">
+            </app-design-formly-form>
+            <button type="submit" class="btn btn-default">Submit</button>
+        </form>
+    </div>
+
+</div>
+
+<div>
+    {{ form2.value | json }}
+</div>
+<div>
+    {{ model2 | json }}
+</div>
+<div>
+    <app-item-control-panel></app-item-control-panel>
 </div>

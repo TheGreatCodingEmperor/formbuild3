@@ -1,7 +1,4 @@
-<div [formControl]="formControl" [formlyAttributes]="field" cdkDropList #todoList="cdkDropList"
-    [cdkDropListData]="field.fieldGroup" [cdkDropListConnectedTo]="[doneList]" class="example-list"
-    (cdkDropListDropped)="drop($event)">
-    <div class="example-box" *ngFor="let item of field.fieldGroup" cdkDrag>
-        <formly-form [form]="form" [fields]="" [model]="model"></formly-form>
-    </div>
+<div [style.backgroundColor]="select?'red':''">
+    <app-design-formly-form  (mouseup)="selectGroup($event)" [form]="form" [fields]="field.fieldGroup"
+    [model]="field.model" [options]="field.options" [Id]="select?'formlyform':'stop'"></app-design-formly-form>
 </div>

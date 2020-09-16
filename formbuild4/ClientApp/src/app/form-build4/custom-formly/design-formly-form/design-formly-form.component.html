@@ -1,8 +1,10 @@
-<div>
+<div [id]="Id" cdkDropList #todoList="cdkDropList" [cdkDropListData]="fields" [cdkDropListConnectedTo]="dropList"
+    class="example-list" (cdkDropListDropped)="drop($event)" >
     <formly-field *ngFor="let field of fields" hide-deprecation [form]="field.form" [options]="field.options"
-        [model]="field.model" [field]="field">
+        [model]="field.model" [field]="field" (dblclick)="itemControl($event,field)" [cdkDragDisabled]="Id!='formlyform'" cdkDrag>
+        <div class="example-custom-placeholder" *cdkDragPlaceholder></div>
     </formly-field>
-    <ng-container #content>
-        <ng-content></ng-content>
-    </ng-container>
 </div>
+<ng-container #content>
+    <ng-content></ng-content>
+</ng-container>

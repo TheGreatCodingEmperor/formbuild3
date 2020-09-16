@@ -8,5 +8,4 @@ import { FormlyField } from '@ngx-formly/core';
 })
 export class DesignFormlyFieldComponent extends FormlyField {
 
-
 }

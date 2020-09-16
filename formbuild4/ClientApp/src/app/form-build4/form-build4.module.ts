@@ -11,18 +11,29 @@ import { FormlyFieldGroupComponent } from './field-types/formly-field-group/form
 import {DragDropModule} from '@angular/cdk/drag-drop';
 import { DesignFormlyFormComponent } from './custom-formly/design-formly-form/design-formly-form.component';
 import { DesignFormlyFieldComponent } from './custom-formly/design-formly-field/design-formly-field.component';
+import { FormlyFieldSelect } from './field-types/select';
+import { FormsModule } from '@angular/forms';
+import { ItemControlPanelComponent } from './component/item-control-panel/item-control-panel.component';
 
 @NgModule({
-  declarations: [FormBuild4Component,FormlyFieldInput, FormlyFieldGroupComponent, DesignFormlyFormComponent, DesignFormlyFieldComponent],
+  declarations: [FormBuild4Component,
+    FormlyFieldInput, 
+    FormlyFieldGroupComponent,
+    FormlyFieldSelect,
+    DesignFormlyFormComponent, 
+    DesignFormlyFieldComponent, ItemControlPanelComponent],
   imports: [
     FormlyMaterialModule,
     ReactiveFormsModule,
     CommonModule,
     FormBuild4RoutingModule,
     DragDropModule,
+    FormsModule,
     FormlyModule.forRoot({
       types:[
-        { name:'input', component: FormlyFieldInput }
+        { name:'input', component: FormlyFieldInput },
+        { name:'group', component: FormlyFieldGroupComponent },
+        { name:'select', component: FormlyFieldSelect }
       ]
     })
   ]

@@ -1,0 +1,40 @@
+<div *ngIf="item">
+    <input type="text" [(ngModel)]="item.key">
+    className
+    <input type="text" [(ngModel)]="item.className">
+    type
+    <input type="text" [(ngModel)]="item.type">
+    <div style="border:solid black;">
+        templateOption
+
+        type
+        <input type="text" [(ngModel)]="item.templateOptions.type">
+        label
+        <input type="text" [(ngModel)]="item.templateOptions.label">
+        disabled
+        <input type="checkbox" [(ngModel)]="item.templateOptions.disabled">
+        options
+        <div *ngFor="let option of item.templateOptions.options">
+            <input type="text" [(ngModel)]="option.label">
+            <input type="text" [(ngModel)]="option.value">
+        </div>
+        rows
+        <input type="number" [(ngModel)]="item.templateOptions.rows">
+        cols
+        <input type="number" [(ngModel)]="item.templateOptions.cols">
+        max
+        <input type="number" [(ngModel)]="item.templateOptions.max">
+        min
+        <input type="number" [(ngModel)]="item.templateOptions.min">
+        minLength
+        <input type="number" [(ngModel)]="item.templateOptions.minLength">
+        readonly
+        <input type="checkbox" [(ngModel)]="item.templateOptions.readonly">
+        required
+        <input type="checkbox" [(ngModel)]="item.templateOptions.required">
+        attributes
+        <input type="text" [(ngModel)]="item.templateOptions.attributes">
+        step
+        <input type="number" [(ngModel)]="item.templateOptions.step">
+    </div>
+</div>
