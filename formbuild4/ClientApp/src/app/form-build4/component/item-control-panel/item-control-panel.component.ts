@@ -10,7 +10,7 @@ import { ItemPoolService } from '../../services/item-pool.service';
   styleUrls: ['./item-control-panel.component.css']
 })
 export class ItemControlPanelComponent implements OnInit,OnDestroy {
-  item:FormlyFieldConfig;
+  item:any;
   //#region 【notify】
   notifyBlock = true;
   notifyItenControlRef:Subscription;
@@ -39,5 +39,4 @@ export class ItemControlPanelComponent implements OnInit,OnDestroy {
       }
     );
   }
-
 }

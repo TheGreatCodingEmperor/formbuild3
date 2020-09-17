@@ -14,8 +14,12 @@ import { ItemPoolService } from '../../services/item-pool.service';
   styleUrls: ['./design-formly-form.component.css']
 })
 export class DesignFormlyFormComponent extends FormlyForm implements OnInit,OnDestroy {
-  /** drop 依據 ID */
+  /** @summary drop 依據 ID */
   @Input()Id = 'stop';
+  /** @summary 拖曳、array方向 horizontal/vertical */
+  @Input()orientation = 'horizontal';
+  /** @summary 是否禁止拖曳 true/false */
+  @Input()disableDrag = true;
   /** 可 Drop 的 array id */
   dropList: string[] = [];
 
@@ -43,18 +47,20 @@ export class DesignFormlyFormComponent extends FormlyForm implements OnInit,OnDe
   ngOnDestroy(){
   }
 
-  /** 初始化 接收廣播 */
+  /** @summary 初始化 接收廣播 */
   notifyInit(){
   }
 
-  /** 對此物件控制*/
-  itemControl(event:any,field:FormlyFieldConfig){
+  /** @summary 發出廣播 控制此物件屬性*/
+  itemControl(event:any,field:any){
     event.stopPropagation();
+    console.log(field);
     this.formBuild4Service.notifyItemControl.next(field);
   }
 
-  /** 廣播 drop 這個物件 */
+  /** @summary 廣播 drop 這個物件 */
   drop(event:any) {
     this.formBuild4Service.notifyDrop.next(event);
   }
+
 }

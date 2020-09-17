@@ -6,3 +6,10 @@
     width: 50px;
     transition: transform 250ms cubic-bezier(0, 0, 0.2, 1);
 }
+.drawer{
+    width:100%;
+    background:white;
+}
+mat-sidenav{
+    z-index: 9999;
+}

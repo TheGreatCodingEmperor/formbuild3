@@ -1,7 +1,13 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Component, HostListener, OnDestroy, OnInit } from '@angular/core';
 import { FieldType } from '@ngx-formly/core';
 import { Subscription } from 'rxjs/internal/Subscription';
 import { FormBuild4Service } from '../../services/form-build4.service';
+export interface GroupAttributes {
+  orientation: string
+}
+export class DefaultGroupAttributes implements GroupAttributes {
+  orientation = 'horizontal';
+}
 
 @Component({
   selector: 'app-formly-field-group',
@@ -9,10 +15,11 @@ import { FormBuild4Service } from '../../services/form-build4.service';
   styleUrls: ['./formly-field-group.component.css']
 })
 export class FormlyFieldGroupComponent extends FieldType implements OnInit, OnDestroy {
-  /** 廣播監聽器 */
+  /** @summary 廣播監聽器 選擇group */
   notifySelectGroupRef: Subscription;
-  /** 是否選擇此group */
+  /** @summary 是否選擇此group */
   select = false;
+  class = "";
   constructor(
     private formBuild4Service: FormBuild4Service
   ) {
@@ -21,6 +28,9 @@ export class FormlyFieldGroupComponent extends FieldType implements OnInit, OnDe
 
   ngOnInit() {
     this.notifyInit();
+    if (!this.to.attributes) {
+      this.to.attributes = new DefaultGroupAttributes as any;
+    }
   }
 
   ngOnDestroy() {
@@ -28,13 +38,13 @@ export class FormlyFieldGroupComponent extends FieldType implements OnInit, OnDe
       this.notifySelectGroupRef.unsubscribe();
   }
 
-  /** 初始化 監聽廣播 */
+  /** @summary 初始化 監聽廣播 */
   notifyInit() {
+    /** @summary 監聽是否選擇此group */
     this.notifySelectGroupRef = this.formBuild4Service.notifySelectGroup.subscribe(
       res => {
         if (!res) return;
         if (res === this.field.key) {
-          console.log("select")
           this.select = true;
         }
         else {
@@ -44,10 +54,31 @@ export class FormlyFieldGroupComponent extends FieldType implements OnInit, OnDe
     );
   }
 
-  /** 對外廣播 選擇此group */
-  selectGroup(e:any) {
+  /** @summary 對外廣播 選擇此group */
+  selectGroup(e: any) {
     e.stopPropagation();
-    console.log(this.field.key);
+    console.log('select');
     this.formBuild4Service.notifySelectGroup.next(this.field.key);
+  }
+
+  /** 
+   * @summary 此group內部元件群，是否可拖曳
+   * @todo select = true 才能拖曳
+   */
+  get disableDrag() {
+    return !this.select;
+  }
+
+  hover(event: any) {
+    event.stopPropagation();
+    event.preventDefault();
+    this.class = "enter";
+
+  }
+
+  leave(event: any) {
+    event.stopPropagation();
+    event.preventDefault();
+    this.class = "";
   }
 }

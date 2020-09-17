@@ -1,32 +1,43 @@
-<div style="display: flex;" (mouseup)="unselectAllGroup()">
-    <div style="width:50%;">
+<mat-drawer-container class="drawer">
+
+    <!-- 元件庫 -->
+    <mat-drawer #itemPoolDrawer mode="side" style="background-color: white;color:black;">
         <div [id]="items" cdkDropList #todoList="cdkDropList" [cdkDropListData]="itemPool"
             [cdkDropListConnectedTo]="dropList" class="example-list" (cdkDropListDropped)="drop($event)">
-            
+
             <div *ngFor="let item of itemPool" cdkDrag>
                 <div class="example-custom-placeholder" *cdkDragPlaceholder>
 
-                </div>{{item.type}}</div>
+                </div>{{item.type}}
+            </div>
         </div>
-    </div>
+    </mat-drawer>
+
+    <!-- 屬性 -->
+    <mat-drawer #controlPanel mode="side" position="end" style="position:fixed;background-color: white;color:black;">
+        <app-item-control-panel></app-item-control-panel>
+        <!-- <button (click)="itemPoolDrawer.close();controlPanel.toggle();">control Panel</button> -->
+    </mat-drawer>
 
 
-    <div style="width:50%;">
-        <form style="width:50%;" [formGroup]="form2" (ngSubmit)="submit(model)">
-            <app-design-formly-form [form]="form2" [fields]="fields2" [model]="model2" [Id]="'field2'">
-            </app-design-formly-form>
-            <button type="submit" class="btn btn-default">Submit</button>
-        </form>
-    </div>
+    <!-- 表單本體 -->
+    <mat-drawer-content>
+        <div (mouseup)="unselectAllGroup($event)" style="width: 100vw;">
+            <form [formGroup]="form2" (ngSubmit)="submit(model)">
+                <app-design-formly-form [form]="form2" [fields]="fields2" [model]="model2" [Id]="'field2'"
+                    [orientation]="'vertical'" [disableDrag]="disableDrag">
+                </app-design-formly-form>
+                <button type="submit" class="btn btn-default">Submit</button>
+            </form>
+        </div>
+    </mat-drawer-content>
 
-</div>
-
+</mat-drawer-container>
+<button (click)="itemPoolDrawer.toggle();">item pool</button>
+<button (click)="controlPanel.toggle();">control Panel</button>
 <div>
     {{ form2.value | json }}
 </div>
 <div>
     {{ model2 | json }}
-</div>
-<div>
-    <app-item-control-panel></app-item-control-panel>
 </div>

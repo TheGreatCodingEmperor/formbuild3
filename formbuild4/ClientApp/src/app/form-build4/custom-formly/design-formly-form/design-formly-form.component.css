@@ -8,8 +8,10 @@
 }
 
 :host>div {
-  border: solid 2px black;
+  /* All the borders by using the spread properties */
   min-width: 50px;
   min-height: 20px;
   background: rgba(50, 50, 50, 0.1);
+  display: flex;
+  flex-wrap: wrap;
 }

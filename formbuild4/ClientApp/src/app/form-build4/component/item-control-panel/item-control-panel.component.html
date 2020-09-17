@@ -1,4 +1,4 @@
-<div *ngIf="item">
+<div *ngIf="item" style="width:20vw;display: flex;flex-wrap: wrap;">
     <input type="text" [(ngModel)]="item.key">
     className
     <input type="text" [(ngModel)]="item.className">
@@ -6,12 +6,11 @@
     <input type="text" [(ngModel)]="item.type">
     <div style="border:solid black;">
         templateOption
-
-        type
+        <label>type</label>
         <input type="text" [(ngModel)]="item.templateOptions.type">
-        label
+        <label>label</label>
         <input type="text" [(ngModel)]="item.templateOptions.label">
-        disabled
+        <label>disabled</label>
         <input type="checkbox" [(ngModel)]="item.templateOptions.disabled">
         options
         <div *ngFor="let option of item.templateOptions.options">
@@ -36,5 +35,13 @@
         <input type="text" [(ngModel)]="item.templateOptions.attributes">
         step
         <input type="number" [(ngModel)]="item.templateOptions.step">
+    </div>
+    <div [ngSwitch]="item.type">
+        <p *ngSwitchCase="'group'">
+            <app-group-control-panel [item]='item'></app-group-control-panel>
+        </p>
+        <p *ngSwitchDefault>
+            none
+        </p>
     </div>
 </div>

@@ -1,9 +1,12 @@
+using formbuild4.FormBuild4Model;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.SpaServices.AngularCli;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using Pomelo.EntityFrameworkCore;
 
 namespace formbuild4 {
     public class Startup {
@@ -19,6 +22,8 @@ namespace formbuild4 {
 
             // Register the Swagger generator, defining 1 or more Swagger documents
             services.AddSwaggerGen ();
+            var ConnectionString = Configuration["ConnectionString:DefaultConnection"];
+            services.AddDbContext<FormBuild4DBContext> (x => x.UseMySql (Configuration["ConnectionString:DefaultConnection"]));
 
             // In production, the Angular files will be served from this directory
             services.AddSpaStaticFiles (configuration => {
@@ -56,6 +61,9 @@ namespace formbuild4 {
                     pattern: "{controller}/{action=Index}/{id?}");
             });
 
+            var _repository = app.ApplicationServices.GetRequiredService<FormBuild4DBContext> ();
+            _repository.Database.EnsureCreated ();
+
             app.UseSpa (spa => {
                 // To learn more about options for serving an Angular SPA from ASP.NET Core,
                 // see https://go.microsoft.com/fwlink/?linkid=864501
@@ -63,7 +71,7 @@ namespace formbuild4 {
                 spa.Options.SourcePath = "ClientApp";
 
                 if (env.IsDevelopment ()) {
-                    spa.UseProxyToSpaDevelopmentServer ("http://localhost:4200");
+                    spa.UseProxyToSpaDevelopmentServer ("http://localhost:4300");
                     // spa.UseAngularCliServer(npmScript: "start");
                 }
             });

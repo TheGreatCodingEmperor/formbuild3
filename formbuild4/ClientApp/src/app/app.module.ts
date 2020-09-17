@@ -13,6 +13,9 @@ import { FormBuild4Module } from './form-build4/form-build4.module';
 import { FormlyModule } from '@ngx-formly/core';
 import { FormBuild4Component } from './form-build4/view/form-build4/form-build4.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { RuntimeFormComponent } from './runtime-form/runtime-form.component';
+import { RuntimeFormlyFormComponent } from './runtime-form/runtime-formly-form/runtime-formly-form.component';
+import { RuntimeFormlyFieldComponent } from './runtime-form/runtime-formly-field/runtime-formly-field.component';
 
 @NgModule({
   declarations: [
@@ -20,7 +23,10 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
     NavMenuComponent,
     HomeComponent,
     CounterComponent,
-    FetchDataComponent
+    FetchDataComponent,
+    RuntimeFormComponent,
+    RuntimeFormlyFormComponent,
+    RuntimeFormlyFieldComponent
   ],
   imports: [
     BrowserModule.withServerTransition({ appId: 'ng-cli-universal' }),

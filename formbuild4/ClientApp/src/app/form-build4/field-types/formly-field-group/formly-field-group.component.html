@@ -1,4 +1,5 @@
-<div [style.backgroundColor]="select?'red':''">
-    <app-design-formly-form  (mouseup)="selectGroup($event)" [form]="form" [fields]="field.fieldGroup"
-    [model]="field.model" [options]="field.options" [Id]="select?'formlyform':'stop'"></app-design-formly-form>
+<div (mouseenter)="hover($event)" (mouseleave)="leave($event)" [ngClass]="class" [style.backgroundColor]="select?'red':''">
+    <app-design-formly-form  (mouseup)="selectGroup($event);" [form]="form" [fields]="field.fieldGroup"
+    [model]="field.model" [options]="field.options" [Id]="select?'formlyform':'stop'"
+    [orientation]="to.attributes.orientation" [disableDrag]="disableDrag"></app-design-formly-form>
 </div>

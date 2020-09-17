@@ -14,6 +14,8 @@ import { DesignFormlyFieldComponent } from './custom-formly/design-formly-field/
 import { FormlyFieldSelect } from './field-types/select';
 import { FormsModule } from '@angular/forms';
 import { ItemControlPanelComponent } from './component/item-control-panel/item-control-panel.component';
+import { GroupControlPanelComponent } from './control-panel/group-control-panel/group-control-panel.component';
+import { BasicControlPanelComponent } from './control-panel/basic-control-panel/basic-control-panel.component';
 
 @NgModule({
   declarations: [FormBuild4Component,
@@ -21,7 +23,10 @@ import { ItemControlPanelComponent } from './component/item-control-panel/item-c
     FormlyFieldGroupComponent,
     FormlyFieldSelect,
     DesignFormlyFormComponent, 
-    DesignFormlyFieldComponent, ItemControlPanelComponent],
+    DesignFormlyFieldComponent, 
+    ItemControlPanelComponent, 
+    GroupControlPanelComponent, 
+    BasicControlPanelComponent],
   imports: [
     FormlyMaterialModule,
     ReactiveFormsModule,

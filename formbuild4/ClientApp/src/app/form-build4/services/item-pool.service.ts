@@ -6,7 +6,7 @@ import { FormlyFieldConfig } from '@ngx-formly/core';
 })
 export class ItemPoolService {
   //#region 【item pools】
-  itemPool = [
+  itemPool:FormlyFieldConfig[] = [
     {
       key: 'email2',
       type: 'input',
@@ -43,6 +43,9 @@ export class ItemPoolService {
             label: 'Email address3',
             placeholder: 'Enter email',
             required: true,
+            attributes:{
+              orientation:'vertical'
+            }
           }
         }
       ]
